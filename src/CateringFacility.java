@@ -6,11 +6,23 @@ import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.*;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.X509EncodedKeySpec;
+import java.util.Base64;
+import javax.crypto.*;
 
 public class CateringFacility extends UnicastRemoteObject implements CateringFacilityInterface {
 
     Registry myRegistry;
     Registrar service;
+    String CF;
+    SecretKey s;
+    SecretKey ScfDayi;
+
+
     protected CateringFacility() throws RemoteException {
     }
 
@@ -30,10 +42,23 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
             // search for CounterService
             service = (Registrar) myRegistry.lookup("Registrar");
             if (service != null) service.connect(this);
+            //is connected
+
+            service.enrollFacility(this.getCF());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+    public void setUniqueIDCF(String CF){
+        this.CF = CF;
+    }
 
+    public String getCF() {
+        return CF;
+    }
 
+    public void setCF(String CF) {
+        this.CF = CF;
+    }
 }

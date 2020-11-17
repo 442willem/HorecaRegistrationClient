@@ -1,6 +1,11 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+
 public class Main extends Application{
 
     @Override
@@ -10,7 +15,17 @@ public class Main extends Application{
 
             CateringFacility cateringFacility1 =new CateringFacility();
             cateringFacility1.setUniqueIDCF("Kastart BVBA");
+            cateringFacility1.setLocation("Onderbergen 42, 9000 Gent");
             cateringFacility1.connectToServer();
+
+            DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = dateFormatter .parse("2020-11-20 00:00:01");
+            Timer timer = new Timer();
+            timer.schedule(new TimedTask(),date, 86400000 );
+
+            //Use this if you want to execute it repeatedly
+            //int period = 10000;//10secs
+            //timer.schedule(new MyTimeTask(), date, period );
 
         } catch (Exception ex) {
             ex.printStackTrace();

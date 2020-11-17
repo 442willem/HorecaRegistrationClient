@@ -20,7 +20,9 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     Registrar service;
     String CF;
     SecretKey s;
-    SecretKey ScfDayi;
+    SecretKey sCFDayi;
+    String location;
+    String dailyNym;
 
 
     protected CateringFacility() throws RemoteException {
@@ -43,15 +45,33 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
             service = (Registrar) myRegistry.lookup("Registrar");
             if (service != null) service.connect(this);
             //is connected
-
-            service.enrollFacility(this.getCF());
+            //Generated secret key based on unique identifier
+            this.s = service.enrollFacility(this.getCF());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void getDailySecret() throws RemoteException {
+       this.sCFDayi= service.getDailyKey(CF,s);
+    }
+
+    public void getDailyNym() throws RemoteException{
+        dailyNym = service.getDailyPseudonym(this.location,sCFDayi);
+    }
+
+
     public void setUniqueIDCF(String CF){
         this.CF = CF;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getCF() {

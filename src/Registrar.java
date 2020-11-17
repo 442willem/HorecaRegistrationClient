@@ -1,6 +1,7 @@
 import javax.crypto.SecretKey;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.security.PublicKey;
 import java.util.List;
 
 public interface Registrar extends Remote{
@@ -10,9 +11,9 @@ public interface Registrar extends Remote{
 
      SecretKey enrollFacility(String cf) throws RemoteException;
 
-     void enrollUsers() throws RemoteException;
+     PublicKey enrollUsers(int gsm) throws RemoteException;
 
-     void retrieveToken() throws RemoteException;
+     List<Byte[]> retrieveToken() throws RemoteException;
 
      SecretKey getDailyKey(String cf, SecretKey s) throws RemoteException;
 

@@ -49,7 +49,9 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
             if (service != null) service.connect(this);
             //is connected
             //Generated secret key based on unique identifier
-            this.s = service.enrollFacility(this.getCF());
+            if (service != null) {
+                this.s = service.enrollFacility(this.getCF());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,7 +78,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
 
         md.update(BigInteger.valueOf(randomGetal).toByteArray());
 
-        String datastring = randomGetal + CF +   Base64.getEncoder().encodeToString(md.digest(dailyNym.getBytes()));
+        String datastring = randomGetal +',' + CF +',' +  Base64.getEncoder().encodeToString(md.digest(dailyNym.getBytes()));
 
         //deze ophangen dan
         System.out.println(datastring);

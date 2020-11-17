@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.net.UnknownServiceException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,6 +27,11 @@ public class Main extends Application{
             cateringFacility1.getDailySecret();
             cateringFacility1.getDailyNym();
             cateringFacility1.generateQRcode();
+
+            User user = new User();
+            user.setGsmNummer(102);
+            user.setNaam("JEOF");
+            user.connectToServer();
 
             //Use this if you want to execute it repeatedly
             //int period = 10000;//10secs

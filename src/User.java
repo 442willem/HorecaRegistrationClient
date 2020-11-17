@@ -5,11 +5,21 @@ import java.rmi.registry.Registry;
 import java.rmi.server.RMIClientSocketFactory;
 import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
+import java.security.PublicKey;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User extends UnicastRemoteObject implements UserInterface {
 
     Registry myRegistry;
     Registrar service;
+
+    PublicKey registrarPubKey;
+
+    int gsmNummer;
+    String naam;
+    List<Byte[]> MyTokens = new ArrayList<>();
+    //andere identifiers...
 
     protected User() throws RemoteException {
     }
@@ -29,9 +39,32 @@ public class User extends UnicastRemoteObject implements UserInterface {
             // search for CounterService
             service = (Registrar) myRegistry.lookup("Registrar");
             if (service != null) service.connect(this);
+            if (service != null) {
+                registrarPubKey = service.enrollUsers(this.getGsmNummer());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void retrieveMyTokens() throws RemoteException {
+        MyTokens = service.retrieveToken();
+    }
+
+    public int getGsmNummer() {
+        return gsmNummer;
+    }
+
+    public void setGsmNummer(int gsmNummer) {
+        this.gsmNummer = gsmNummer;
+    }
+
+    public String getNaam() {
+        return naam;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
     }
 }
 

@@ -7,6 +7,7 @@ import java.rmi.server.RMIServerSocketFactory;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.PublicKey;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 public class User extends UnicastRemoteObject implements UserInterface {
@@ -50,12 +51,8 @@ public class User extends UnicastRemoteObject implements UserInterface {
     public void retrieveMyTokens() throws RemoteException {
         System.out.println("Retrieving tokens");
         MyTokens = service.retrieveToken();
-        for (byte[] token: MyTokens
-             ) {
-            for (int i = 0 ; i< token.length; i++){
-                System.out.print(token[i]);
-            }
-            System.out.println("");
+        for (byte[] token: MyTokens) {
+            System.out.println(Base64.getEncoder().encodeToString(token));
         }
     }
 

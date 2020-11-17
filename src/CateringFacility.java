@@ -61,7 +61,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     public void getDailySecret() throws RemoteException {
         System.out.println("getting daily secret");
        this.sCFDayi= service.getDailyKey(CF,s);
-       System.out.println(sCFDayi.toString());
+       System.out.println(Base64.getEncoder().encodeToString(sCFDayi.getEncoded()));
     }
 
     public void getDailyNym() throws RemoteException{

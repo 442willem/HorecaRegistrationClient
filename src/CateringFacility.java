@@ -21,7 +21,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     Registry myRegistry;
     Registrar service;
     String CF;
-    String s;
+    SecretKey s;
     SecretKey sCFDayi;
     String location;
     String dailyNym;

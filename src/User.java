@@ -18,7 +18,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
 
     int gsmNummer;
     String naam;
-    List<Byte[]> MyTokens = new ArrayList<>();
+    List<byte[]> MyTokens = new ArrayList<>();
     //andere identifiers...
 
     protected User() throws RemoteException {
@@ -50,7 +50,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
     public void retrieveMyTokens() throws RemoteException {
         System.out.println("Retrieving tokens");
         MyTokens = service.retrieveToken();
-        for (Byte[] token: MyTokens
+        for (byte[] token: MyTokens
              ) {
             for (int i = 0 ; i< token.length; i++){
                 System.out.print(token[i]);

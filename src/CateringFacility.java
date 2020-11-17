@@ -82,11 +82,16 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
 
         md.update(BigInteger.valueOf(randomGetal).toByteArray());
 
-        String datastring = randomGetal +',' + CF +',' +  Base64.getEncoder().encodeToString(md.digest(dailyNym.getBytes()));
+        StringBuilder sb = new StringBuilder();
+        sb.append(randomGetal);
+        sb.append(",");
+        sb.append(CF);
+        sb.append(",");
+        sb.append(Base64.getEncoder().encodeToString(md.digest(dailyNym.getBytes())));
+        String datastring = sb.toString();
 
         //deze ophangen dan
         System.out.println(datastring);
-
     }
 
 

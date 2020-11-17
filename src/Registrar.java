@@ -13,7 +13,7 @@ public interface Registrar extends Remote{
 
      PublicKey enrollUsers(int gsm) throws RemoteException;
 
-     List<Byte[]> retrieveToken() throws RemoteException;
+     List<byte[]> retrieveToken() throws RemoteException;
 
      SecretKey getDailyKey(String cf, SecretKey s) throws RemoteException;
 

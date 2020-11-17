@@ -59,11 +59,15 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     }
 
     public void getDailySecret() throws RemoteException {
+        System.out.println("getting daily secret");
        this.sCFDayi= service.getDailyKey(CF,s);
+       System.out.println(sCFDayi.toString());
     }
 
     public void getDailyNym() throws RemoteException{
+        System.out.println("Getting daily nym");
         dailyNym = service.getDailyPseudonym(this.location,sCFDayi);
+        System.out.println(dailyNym);
     }
 
     public void generateQRcode(){

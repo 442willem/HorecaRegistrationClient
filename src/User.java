@@ -48,7 +48,15 @@ public class User extends UnicastRemoteObject implements UserInterface {
     }
 
     public void retrieveMyTokens() throws RemoteException {
+        System.out.println("Retrieving tokens");
         MyTokens = service.retrieveToken();
+        for (Byte[] token: MyTokens
+             ) {
+            for (int i = 0 ; i< token.length; i++){
+                System.out.print(token[i]);
+            }
+            System.out.println("");
+        }
     }
 
     public int getGsmNummer() {

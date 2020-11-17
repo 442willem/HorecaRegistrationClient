@@ -33,6 +33,8 @@ public class Main extends Application{
             user.setNaam("JEOF");
             user.connectToServer();
 
+            user.retrieveMyTokens();
+
             //Use this if you want to execute it repeatedly
             //int period = 10000;//10secs
             //timer.schedule(new MyTimeTask(), date, period );

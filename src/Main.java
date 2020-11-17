@@ -15,7 +15,7 @@ public class Main extends Application{
         {
 
             CateringFacility cateringFacility1 =new CateringFacility();
-            cateringFacility1.setUniqueIDCF("Kastart BVBA");
+            cateringFacility1.setUniqueIDCF("KastartBVBA");
             cateringFacility1.setLocation("Onderbergen 42, 9000 Gent");
             cateringFacility1.connectToServer();
 

@@ -14,7 +14,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
     Registry myRegistry;
     Registrar service;
 
-    PublicKey registrarPubKey;
+    PublicKey registrarPubKey = null;
 
     int gsmNummer;
     String naam;

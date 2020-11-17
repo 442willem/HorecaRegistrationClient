@@ -9,13 +9,13 @@ public interface Registrar extends Remote{
 
      void connect(UserInterface ui) throws RemoteException;
 
-     SecretKey enrollFacility(String cf) throws RemoteException;
+     String enrollFacility(String cf) throws RemoteException;
 
      PublicKey enrollUsers(int gsm) throws RemoteException;
 
      List<Byte[]> retrieveToken() throws RemoteException;
 
-     SecretKey getDailyKey(String cf, SecretKey s) throws RemoteException;
+     SecretKey getDailyKey(String cf, String s) throws RemoteException;
 
      String getDailyPseudonym(String location, SecretKey sCFDayi) throws RemoteException;
 

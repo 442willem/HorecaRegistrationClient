@@ -8,6 +8,8 @@ public class TimedTask  extends TimerTask {
     public void run()  {
         try {
             cf.getDailySecret();
+            cf.getDailyNym();
+            cf.generateQRcode();
         } catch (RemoteException e) {
             e.printStackTrace();
         }

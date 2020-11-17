@@ -18,10 +18,14 @@ public class Main extends Application{
             cateringFacility1.setLocation("Onderbergen 42, 9000 Gent");
             cateringFacility1.connectToServer();
 
-            DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = dateFormatter .parse("2020-11-20 00:00:01");
             Timer timer = new Timer();
-            timer.schedule(new TimedTask(),date, 86400000 );
+            timer.schedule(new TimedTask(),date, 86400000 );     */
+
+            cateringFacility1.getDailySecret();
+            cateringFacility1.getDailyNym();
+            cateringFacility1.generateQRcode();
 
             //Use this if you want to execute it repeatedly
             //int period = 10000;//10secs

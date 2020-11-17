@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,6 +14,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import javax.crypto.*;
+import java.util.Random;
 
 public class CateringFacility extends UnicastRemoteObject implements CateringFacilityInterface {
 
@@ -23,6 +25,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     SecretKey sCFDayi;
     String location;
     String dailyNym;
+
 
 
     protected CateringFacility() throws RemoteException {
@@ -59,6 +62,25 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
 
     public void getDailyNym() throws RemoteException{
         dailyNym = service.getDailyPseudonym(this.location,sCFDayi);
+    }
+
+    public void generateQRcode(){
+        Random rand = new Random(0);
+        int randomGetal = rand.nextInt();
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        md.update(BigInteger.valueOf(randomGetal).toByteArray());
+
+        String datastring = randomGetal + CF +   Base64.getEncoder().encodeToString(md.digest(dailyNym.getBytes()));
+
+        //deze ophangen dan
+        System.out.println(datastring);
+
     }
 
 

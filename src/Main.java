@@ -1,11 +1,11 @@
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.net.UnknownServiceException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Timer;
+import java.time.LocalDateTime;
 
 public class Main extends Application{
 
@@ -13,31 +13,46 @@ public class Main extends Application{
     public void start(Stage stage) {
         try
         {
+            System.out.println("loading root...");
+
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("GUI.fxml"));
+            System.out.println("loading root...");
+
+            Parent root = loader.load();
+            System.out.println("loading controller...");
+
+            stage.setTitle("user.User");
+            stage.setScene(new Scene(root, 520, 400));
+            stage.show();
+            Platform.setImplicitExit(true);
+            System.out.println("GUI opgestart");
 
             CateringFacility cateringFacility1 =new CateringFacility();
             cateringFacility1.setUniqueIDCF("KastartBVBA");
             cateringFacility1.setLocation("Onderbergen 42, 9000 Gent");
             cateringFacility1.connectToServer();
 
-            /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date = dateFormatter .parse("2020-11-20 00:00:01");
-            Timer timer = new Timer();
-            timer.schedule(new TimedTask(),date, 86400000 );     */
+
 
             cateringFacility1.getDailySecret();
             cateringFacility1.getDailyNym();
             cateringFacility1.generateQRcode();
 
             User user = new User();
+            user.setController(loader.getController());
             user.setGsmNummer(102);
             user.setNaam("JEOF");
             user.connectToServer();
 
             user.retrieveMyTokens();
+            /*DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date = dateFormatter .parse("2020-11-20 00:00:01");
+            Timer timer = new Timer();
+            timer.schedule(new user.TimedTaskDaily(cateringFacility1,user),date, 86400000 );
+            Timer timer2 = new Timer();
+            timer2.schedule(new TimedTask2Weekly(),date, 1209600000 );     */
 
-            //Use this if you want to execute it repeatedly
-            //int period = 10000;//10secs
-            //timer.schedule(new MyTimeTask(), date, period );
+            System.out.print(LocalDateTime.now().toString());
 
         } catch (Exception ex) {
             ex.printStackTrace();

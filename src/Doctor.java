@@ -15,7 +15,7 @@ public class Doctor extends UnicastRemoteObject implements DoctorInterface {
 
     KeyPair pair;
 
-    List<String> allLogs;
+    List<String> allLogs=new ArrayList<>();
 
     int id;
 
@@ -49,13 +49,11 @@ public class Doctor extends UnicastRemoteObject implements DoctorInterface {
     @Override
     public void connectToServer() throws RemoteException {
         try {
-            // fire to localhostport 1099
             myRegistry = LocateRegistry.getRegistry("localhost", 1097);
-            // search for CounterService
             matchingService = (MatchingService) myRegistry.lookup("MatchingService");
 
             if (matchingService != null) matchingService.connect(this);
-
+            else System.out.println("matchingservice is null");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,7 +78,7 @@ public class Doctor extends UnicastRemoteObject implements DoctorInterface {
 
                 dsa.initSign(pair.getPrivate());
 
-                byte[] tekst = Base64.getDecoder().decode(log);
+                byte[] tekst = log.getBytes();
                 dsa.update(tekst);
 
                 signedLogs.add(dsa.sign());

@@ -179,7 +179,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
             String s = logs.get(i);
             if(currentToken.equals(s.split(",")[1])){
                 logs.remove(s);
-                logs.add(s.concat(date));
+                logs.add(s.concat(","+date));
             }
         }
     }

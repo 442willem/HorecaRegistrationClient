@@ -12,6 +12,8 @@ public class Controller {
     @FXML
     private Button LeaveFacility;
     @FXML
+    private Button ShareLogs;
+    @FXML
     private TextField DataString;
     @FXML
     private ImageView Image;
@@ -22,14 +24,15 @@ public class Controller {
         System.out.println("initialising controller");
         EnterFacility.setOnAction(new EnterButtonListener());
         LeaveFacility.setOnAction(new LeaveButtonListener());
+        ShareLogs.setOnAction(new ShareLogsButtonListener());
     }
 
     public Controller() {
 
     }
 
-    public void setUser(User u){
-        user=u;
+    public void setUser(User u) {
+        user = u;
     }
 
     public void updateImage(WritableImage i) {
@@ -46,10 +49,18 @@ public class Controller {
             user.scanQR(DataString.getText());
         }
     }
+
     private class LeaveButtonListener implements EventHandler<ActionEvent> {
         @Override
         public void handle(ActionEvent e) {
             user.leaveCateringFacility();
+        }
+    }
+
+    private class ShareLogsButtonListener implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e) {
+            user.shareLogs();
         }
     }
 }

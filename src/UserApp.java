@@ -7,15 +7,14 @@ import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
 
-public class Main extends Application{
+public class UserApp extends Application {
 
     @Override
     public void start(Stage stage) {
-        try
-        {
+        try {
             System.out.println("loading root...");
 
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("GUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("GUI.fxml"));
             System.out.println("loading root...");
 
             Parent root = loader.load();
@@ -26,17 +25,6 @@ public class Main extends Application{
             stage.show();
             Platform.setImplicitExit(true);
             System.out.println("GUI opgestart");
-
-            CateringFacility cateringFacility1 =new CateringFacility();
-            cateringFacility1.setUniqueIDCF("KastartBVBA");
-            cateringFacility1.setLocation("Onderbergen 42, 9000 Gent");
-            cateringFacility1.connectToServer();
-
-
-
-            cateringFacility1.getDailySecret();
-            cateringFacility1.getDailyNym();
-            cateringFacility1.generateQRcode();
 
             User user = new User();
             user.setController(loader.getController());
@@ -52,11 +40,8 @@ public class Main extends Application{
             Timer timer2 = new Timer();
             timer2.schedule(new TimedTask2Weekly(),date, 1209600000 );     */
 
-            System.out.println(LocalDateTime.now().toString());
+            System.out.print(LocalDateTime.now().toString());
             user.shareLogs();
-
-            Doctor doctor = new Doctor();
-            doctor.sendLogs();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -64,7 +49,8 @@ public class Main extends Application{
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         System.exit(0);
     }
 }
+

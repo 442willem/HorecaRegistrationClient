@@ -99,9 +99,6 @@ public class User extends UnicastRemoteObject implements UserInterface {
 
     public void scanQR(String datastring){
         currentDataString = datastring;
-        String date = LocalDateTime.now().toString();
-        String log = date.concat(currentDataString);
-
 
         sendFirstCapsule(datastring);
     }
@@ -119,7 +116,8 @@ public class User extends UnicastRemoteObject implements UserInterface {
     }
 
     public void sendFirstCapsule(String datastring) {
-        String date = LocalDateTime.now().toString();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date = LocalDateTime.now().format(dtf);
         currentToken = MyTokens.remove(0);
 
         String hash = datastring.split(",")[2];
@@ -148,14 +146,15 @@ public class User extends UnicastRemoteObject implements UserInterface {
             byte[] image=mixingProxy.registerVisit(capsule);
             ByteArrayInputStream bis = new ByteArrayInputStream(image);
             BufferedImage bImage2 = ImageIO.read(bis);
-            controller.updateImage(SwingFXUtils.toFXImage(bImage2,null));
+     //       controller.updateImage(SwingFXUtils.toFXImage(bImage2,null));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void sendCapsule() {
-        String date = LocalDateTime.now().toString();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date = LocalDateTime.now().format(dtf);
 
         StringBuilder sb = new StringBuilder();
         sb.append(date);
@@ -174,13 +173,19 @@ public class User extends UnicastRemoteObject implements UserInterface {
     }
 
     public void leaveCateringFacility(){
-        String date = LocalDateTime.now().toString();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String date = LocalDateTime.now().format(dtf);
         for(int i = 0; i< logs.size();i++){
             String s = logs.get(i);
             if(currentToken.equals(s.split(",")[1])){
                 logs.remove(s);
                 logs.add(s.concat(","+date));
             }
+        }
+        try {
+            mixingProxy.submitCapsules();
+        } catch (RemoteException e) {
+            e.printStackTrace();
         }
     }
 

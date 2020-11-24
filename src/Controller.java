@@ -24,6 +24,7 @@ public class Controller {
         System.out.println("initialising controller");
         EnterFacility.setOnAction(new EnterButtonListener());
         LeaveFacility.setOnAction(new LeaveButtonListener());
+        LeaveFacility.setVisible(false);
         ShareLogs.setOnAction(new ShareLogsButtonListener());
     }
 
@@ -47,6 +48,10 @@ public class Controller {
         @Override
         public void handle(ActionEvent e) {
             user.scanQR(DataString.getText());
+            EnterFacility.setVisible(false);
+            LeaveFacility.setVisible(true);
+            ShareLogs.setVisible(false);
+            DataString.clear();
         }
     }
 
@@ -54,6 +59,9 @@ public class Controller {
         @Override
         public void handle(ActionEvent e) {
             user.leaveCateringFacility();
+            EnterFacility.setVisible(true);
+            LeaveFacility.setVisible(false);
+            ShareLogs.setVisible(true);
         }
     }
 
@@ -61,6 +69,9 @@ public class Controller {
         @Override
         public void handle(ActionEvent e) {
             user.shareLogs();
+            EnterFacility.setVisible(true);
+            LeaveFacility.setVisible(false);
+            ShareLogs.setVisible(true);
         }
     }
 }

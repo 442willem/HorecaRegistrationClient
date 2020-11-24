@@ -14,6 +14,10 @@ public class DoctorApp extends Application{
         try
         {
             Doctor doctor = new Doctor();
+            doctor.connectToServer();
+            System.out.println("reading logs");
+            doctor.readLogs();
+            System.out.println("sending logs");
             doctor.sendLogs();
 
         } catch (Exception ex) {

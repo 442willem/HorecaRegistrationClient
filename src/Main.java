@@ -53,6 +53,10 @@ public class Main extends Application{
             timer2.schedule(new TimedTask2Weekly(),date, 1209600000 );     */
 
             System.out.print(LocalDateTime.now().toString());
+            user.shareLogs();
+
+            Doctor doctor = new Doctor();
+            doctor.sendLogs();
 
         } catch (Exception ex) {
             ex.printStackTrace();

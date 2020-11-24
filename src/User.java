@@ -2,8 +2,7 @@ import javafx.embed.swing.SwingFXUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -102,9 +101,9 @@ public class User extends UnicastRemoteObject implements UserInterface {
         currentDataString = datastring;
         String date = LocalDateTime.now().toString();
         String log = date.concat(currentDataString);
-        logs.add(log);
-        String hash = datastring.split(",")[2];
-        sendFirstCapsule(hash);
+
+
+        sendFirstCapsule(datastring);
     }
 
     public void clearLogs(){
@@ -119,9 +118,11 @@ public class User extends UnicastRemoteObject implements UserInterface {
         }
     }
 
-    public void sendFirstCapsule(String hash) {
+    public void sendFirstCapsule(String datastring) {
         String date = LocalDateTime.now().toString();
         currentToken = MyTokens.remove(0);
+
+        String hash = datastring.split(",")[2];
 
         StringBuilder sb = new StringBuilder();
         sb.append(date);
@@ -130,6 +131,18 @@ public class User extends UnicastRemoteObject implements UserInterface {
         sb.append(",");
         sb.append(hash);
         String capsule = sb.toString();
+        System.out.println(capsule);
+
+        sb = new StringBuilder();
+        sb.append(date);
+        sb.append(",");
+        sb.append(currentToken);
+        sb.append(",");
+        sb.append(hash);
+        sb.append(",");
+        sb.append(datastring.split(",")[0]);
+        String log = sb.toString();
+        logs.add(log);
 
         try {
             byte[] image=mixingProxy.registerVisit(capsule);
@@ -151,6 +164,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
         sb.append(",");
         sb.append(currentDataString.split(",")[2]);
         String capsule = sb.toString();
+        System.out.println(capsule);
 
         try {
             mixingProxy.continueVisit(capsule);
@@ -161,8 +175,46 @@ public class User extends UnicastRemoteObject implements UserInterface {
 
     public void leaveCateringFacility(){
         String date = LocalDateTime.now().toString();
-        String log = date.concat(currentDataString);
-        logs.add(log);
+        for(int i = 0; i< logs.size();i++){
+            String s = logs.get(i);
+            if(currentToken.equals(s.split(",")[1])){
+                logs.remove(s);
+                logs.add(s.concat(date));
+            }
+        }
+    }
+
+    public void shareLogs(){
+       File file = new File("logs.lod");
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter pw = null;
+        try {
+            pw = new PrintWriter(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        pw.close();
+
+        try {
+            FileWriter fwOutput = new FileWriter(file,true);
+
+            for(String log : logs){
+                fwOutput.write(log);
+                fwOutput.write(System.lineSeparator());
+            }
+            fwOutput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 

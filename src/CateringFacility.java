@@ -13,7 +13,7 @@ import java.util.Random;
 public class CateringFacility extends UnicastRemoteObject implements CateringFacilityInterface {
 
     Registry myRegistry;
-    Registrar service;
+    Registrar registrar;
     String CF;
     SecretKey s;
     SecretKey sCFDayi;
@@ -39,12 +39,12 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
             // fire to localhostport 1099
             myRegistry = LocateRegistry.getRegistry("localhost", 1099);
             // search for CounterService
-            service = (Registrar) myRegistry.lookup("Registrar");
-            if (service != null) service.connect(this);
+            registrar = (Registrar) myRegistry.lookup("Registrar");
+            if (registrar != null) registrar.connect(this);
             //is connected
             //Generated secret key based on unique identifier
-            if (service != null) {
-                this.s = service.enrollFacility(this.getCF());
+            if (registrar != null) {
+                this.s = registrar.enrollFacility(this.getCF());
             }
 
         } catch (Exception e) {
@@ -54,19 +54,26 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
 
     public void getDailySecret() throws RemoteException {
         System.out.println("getting daily secret");
-       this.sCFDayi= service.getDailyKey(CF,s);
+       this.sCFDayi= registrar.getDailyKey(CF,s);
        System.out.println(Base64.getEncoder().encodeToString(sCFDayi.getEncoded()));
     }
 
     public void getDailyNym() throws RemoteException{
         System.out.println("Getting daily nym");
-        dailyNym = service.getDailyPseudonym(this.location,sCFDayi);
+        dailyNym = registrar.getDailyPseudonym(this.location,sCFDayi);
         System.out.println(dailyNym);
     }
 
     public void generateQRcode(){
         Random rand = new Random(0);
         int randomGetal = rand.nextInt();
+        try {
+            if(registrar==null)System.out.println("ik ben null");
+            if(dailyNym==null)System.out.println("nym is null");
+            registrar.setDailyNym(randomGetal,dailyNym);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-256");

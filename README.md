@@ -1,6 +1,7 @@
 # HorecaRegistrationClient
 
 How to run:
+
 -Catering facility:
   When executing the cateringFacilityApp.java file a catering facility (in this case KastartBVBA) will be registered with the server. 
   The console will print out the daily QR-code in the form of a datastring.

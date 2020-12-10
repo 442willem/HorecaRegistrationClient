@@ -53,23 +53,19 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     }
 
     public void getDailySecret() throws RemoteException {
-        System.out.println("getting daily secret");
-       this.sCFDayi= registrar.getDailyKey(CF,s);
-       System.out.println(Base64.getEncoder().encodeToString(sCFDayi.getEncoded()));
+        System.out.println("getting daily secret...");
+        this.sCFDayi= registrar.getDailyKey(CF,s);
     }
 
     public void getDailyNym() throws RemoteException{
-        System.out.println("Getting daily nym");
+        System.out.println("Getting daily nym...");
         dailyNym = registrar.getDailyPseudonym(this.location,sCFDayi);
-        System.out.println(dailyNym);
     }
 
     public void generateQRcode(){
         Random rand = new Random(0);
         int randomGetal = rand.nextInt();
         try {
-            if(registrar==null)System.out.println("ik ben null");
-            if(dailyNym==null)System.out.println("nym is null");
             registrar.setDailyNym(randomGetal,dailyNym);
         } catch (RemoteException e) {
             e.printStackTrace();
@@ -92,6 +88,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
         String datastring = sb.toString();
 
         //deze ophangen dan
+        System.out.println("Daily QR-code:");
         System.out.println(datastring);
     }
 

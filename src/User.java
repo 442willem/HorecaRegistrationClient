@@ -93,9 +93,6 @@ public class User extends UnicastRemoteObject implements UserInterface {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-        for (String token : MyTokens) {
-            System.out.println(token);
-        }
     }
 
     public int getGsmNummer() {
@@ -148,7 +145,6 @@ public class User extends UnicastRemoteObject implements UserInterface {
             sb.append(",");
             sb.append(hash);
             String capsule = sb.toString();
-            System.out.println(capsule);
 
             sb = new StringBuilder();
             sb.append(date);
@@ -280,7 +276,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        System.out.println("Logs shared");
     }
 
     public void fetchCriticalLogs() {
@@ -296,16 +292,12 @@ public class User extends UnicastRemoteObject implements UserInterface {
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
                         LocalDateTime begin1 = LocalDateTime.parse(localLog.split(",")[0], dtf);
-                        System.out.println("begin 1: " + begin1.toString());
 
                         LocalDateTime eind1 = LocalDateTime.parse(localLog.split(",")[4], dtf);
-                        System.out.println("eind 1: " + eind1.toString());
 
                         LocalDateTime begin2 = LocalDateTime.parse(infectedLog.split(",")[1], dtf);
-                        System.out.println("begin 2: " + begin2.toString());
 
                         LocalDateTime eind2 = LocalDateTime.parse(infectedLog.split(",")[2], dtf);
-                        System.out.println("eind 2: " + eind2.toString());
 
                         if (begin1.isBefore(eind2) && eind1.isAfter(begin2)) {
                             acknowledgedTokens.add(localLog.split(",")[1].split(";")[1]);

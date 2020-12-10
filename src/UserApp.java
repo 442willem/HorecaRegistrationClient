@@ -29,7 +29,7 @@ public class UserApp extends Application {
             User user = new User();
             user.setController(loader.getController());
             user.setGsmNummer(102);
-            user.setNaam("JEOF");
+            user.setNaam("Willem");
             user.connectToServer();
 
             stage.setTitle("User: "+user.getNaam());
@@ -39,9 +39,6 @@ public class UserApp extends Application {
             Platform.setImplicitExit(true);
             System.out.println("GUI opgestart");
 
-
-            user.retrieveMyTokens();
-
             //start up daily tasks
             LocalTime midnight = LocalTime.MIDNIGHT;
             LocalDate today = LocalDate.now();
@@ -50,8 +47,6 @@ public class UserApp extends Application {
             Timer timer = new Timer();
             timer.schedule(new TimedTaskDailyUser(user), Date.from(daily.atZone(ZoneId.systemDefault()).toInstant()), 86400000);
 
-            System.out.print(LocalDateTime.now().toString());
-            user.shareLogs();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

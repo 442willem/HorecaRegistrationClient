@@ -28,10 +28,6 @@ public class Doctor extends UnicastRemoteObject implements DoctorInterface {
             id = random.nextInt();
             keyGen.initialize(2048, random);
             pair = keyGen.generateKeyPair();
-            System.out.println("pair:"+pair);
-            System.out.println("publickey:"+ Base64.getEncoder().encodeToString(pair.getPublic().getEncoded()));
-            System.out.println("privatekey:"+Base64.getEncoder().encodeToString(pair.getPrivate().getEncoded()));
-
         } catch (NoSuchAlgorithmException | NoSuchProviderException e) {
             e.printStackTrace();
         }

@@ -5,7 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.Timer;
 
 public class CateringFacilityApp extends Application{
 
@@ -19,9 +24,17 @@ public class CateringFacilityApp extends Application{
             cateringFacility1.connectToServer();
 
 
-            cateringFacility1.getDailySecret();
+            /*cateringFacility1.getDailySecret();
             cateringFacility1.getDailyNym();
-            cateringFacility1.generateQRcode();
+            cateringFacility1.generateQRcode();*/
+
+            //start up daily tasks
+            LocalTime midnight = LocalTime.MIDNIGHT;
+            LocalDate today = LocalDate.now();
+            LocalDateTime localDateTime = LocalDateTime.of(today,midnight);
+            Timer timer = new Timer();
+            timer.schedule(new TimedTaskDailyCF(cateringFacility1), Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant()), 86400000);
+
 
         } catch (Exception ex) {
             ex.printStackTrace();

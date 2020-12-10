@@ -7,7 +7,7 @@ public interface MatchingService extends Remote {
 
     void connect(DoctorInterface d) throws RemoteException;
 
-    void requestInfectedLogs() throws RemoteException;
+    List<String> requestInfectedLogs() throws RemoteException;
 
     void forwardLogs(int id, List<String> unsignedLogs, List<byte[]> signedLogs) throws RemoteException;
 

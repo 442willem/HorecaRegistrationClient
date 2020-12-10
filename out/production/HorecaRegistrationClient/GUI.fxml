@@ -6,22 +6,19 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
     <children>
-        <SplitPane dividerPositions="0.520066889632107" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <Button fx:id="ShareLogs" visible="true" layoutX="138.0" layoutY="182.0" mnemonicParsing="false" text="Share logs" AnchorPane.bottomAnchor="168.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="182.0" />
-                        <Button fx:id="EnterFacility" visible="true" layoutX="242.0" layoutY="335.0" mnemonicParsing="false" text="Enter" AnchorPane.bottomAnchor="37.799999999999976" AnchorPane.leftAnchor="242.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="335.0" />
-                        <Button fx:id="LeaveFacility" visible="true"  layoutX="138.0" layoutY="78.0" mnemonicParsing="false" text="LEAVE" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="138.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="78.0" />
-                        <TextField fx:id="DataString" layoutX="80.0" layoutY="335.0" promptText="datastring" AnchorPane.bottomAnchor="37.799999999999955" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="79.19999999999999" AnchorPane.topAnchor="335.0" />
-                    </children>
-                </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                    <children>
-                        <ImageView fx:id="Image" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="124.39999999999998" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="124.0" />
-                    </children>
-                </AnchorPane>
-            </items>
-        </SplitPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="274.0">
+              <children>
+                  <Button fx:id="ShareLogs" layoutX="114.0" layoutY="120.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Share logs" visible="true" AnchorPane.leftAnchor="114.0" AnchorPane.topAnchor="120.0" />
+                  <Button fx:id="EnterFacility" layoutX="197.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="Enter" visible="true" AnchorPane.topAnchor="37.0" />
+                  <Button fx:id="LeaveFacility" layoutX="125.0" layoutY="79.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="LEAVE" visible="true" AnchorPane.topAnchor="79.0" />
+                  <TextField fx:id="DataString" layoutX="25.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" promptText="datastring" AnchorPane.topAnchor="37.0" />
+                  <Label fx:id="InfectedLabel" layoutX="81.0" layoutY="366.0" prefHeight="17.0" prefWidth="138.0" text="You may have been infected!" underline="true" visible="false" AnchorPane.topAnchor="200.0" />
+              </children>
+          </AnchorPane>
+          <AnchorPane layoutX="274.0" layoutY="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="327.0">
+              <children>
+                  <ImageView fx:id="Image" fitHeight="150.0" fitWidth="200.0" layoutX="64.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="63.333333333333314" AnchorPane.topAnchor="125.0" />
+              </children>
+          </AnchorPane>
     </children>
 </AnchorPane>

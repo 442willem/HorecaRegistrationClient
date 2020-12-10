@@ -2,6 +2,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.*;
 
@@ -17,6 +18,8 @@ public class Controller {
     private TextField DataString;
     @FXML
     private ImageView Image;
+    @FXML
+    private Label InfectedLabel;
 
     User user;
 
@@ -36,12 +39,14 @@ public class Controller {
         user = u;
     }
 
-    public void updateImage(WritableImage i) {
+    public void updateImage(Image i) {
         Image.setImage(i);
-        Image.setX(10);
-        Image.setY(10);
-        Image.setFitWidth(575);
+        Image.setFitWidth(100);
         Image.setPreserveRatio(true);
+    }
+
+    public void setInfected(){
+        InfectedLabel.setVisible(true);
     }
 
     private class EnterButtonListener implements EventHandler<ActionEvent> {
@@ -52,6 +57,7 @@ public class Controller {
             LeaveFacility.setVisible(true);
             ShareLogs.setVisible(false);
             DataString.clear();
+            DataString.setVisible(false);
         }
     }
 
@@ -62,6 +68,7 @@ public class Controller {
             EnterFacility.setVisible(true);
             LeaveFacility.setVisible(false);
             ShareLogs.setVisible(true);
+            DataString.setVisible(true);
         }
     }
 

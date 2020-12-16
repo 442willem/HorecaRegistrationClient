@@ -63,7 +63,7 @@ public class CateringFacility extends UnicastRemoteObject implements CateringFac
     }
 
     public void generateQRcode(){
-        Random rand = new Random(0);
+        Random rand = new Random();
         int randomGetal = rand.nextInt();
         try {
             registrar.setDailyNym(randomGetal,dailyNym);

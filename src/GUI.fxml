@@ -13,6 +13,8 @@
                   <Button fx:id="LeaveFacility" layoutX="125.0" layoutY="79.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" text="LEAVE" visible="true" AnchorPane.topAnchor="79.0" />
                   <TextField fx:id="DataString" layoutX="25.0" layoutY="37.0" minHeight="-Infinity" minWidth="-Infinity" promptText="datastring" AnchorPane.topAnchor="37.0" />
                   <Label fx:id="InfectedLabel" layoutX="81.0" layoutY="366.0" prefHeight="17.0" prefWidth="138.0" text="You may be infected!" underline="true" visible="false" AnchorPane.topAnchor="200.0" />
+                  <Button fx:id="FlushCapsules" layoutX="14.0" layoutY="220.0" mnemonicParsing="false" text="Flush capsules" AnchorPane.topAnchor="220.0" />
+                  <Button fx:id="CheckCritical" layoutX="108.0" layoutY="220.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="92.0" text="Check critical" />
               </children>
           </AnchorPane>
           <AnchorPane layoutX="274.0" layoutY="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="327.0">

@@ -20,6 +20,10 @@ public class Controller {
     private ImageView Image;
     @FXML
     private Label InfectedLabel;
+    @FXML
+    private Button FlushCapsules;
+    @FXML
+    private Button CheckCritical;
 
     User user;
 
@@ -29,6 +33,8 @@ public class Controller {
         LeaveFacility.setOnAction(new LeaveButtonListener());
         LeaveFacility.setVisible(false);
         ShareLogs.setOnAction(new ShareLogsButtonListener());
+        FlushCapsules.setOnAction(new FlushCapsulesButtonListener());
+        CheckCritical.setOnAction(new CheckCriticalButtonListener());
     }
 
     public Controller() {
@@ -79,6 +85,18 @@ public class Controller {
             EnterFacility.setVisible(true);
             LeaveFacility.setVisible(false);
             ShareLogs.setVisible(true);
+        }
+    }
+    private class FlushCapsulesButtonListener implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e) {
+            user.flushCapsules();
+        }
+    }
+    private class CheckCriticalButtonListener implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e) {
+            user.fetchCriticalLogs();
         }
     }
 }

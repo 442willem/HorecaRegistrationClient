@@ -186,7 +186,7 @@ public class User extends UnicastRemoteObject implements UserInterface {
                     //start up bihourly task
                     LocalDateTime biHourly = LocalDateTime.now();
                     timer = new Timer();
-                    timer.schedule(new TimedTaskBiHourly(this), Date.from(biHourly.atZone(ZoneId.systemDefault()).toInstant()), 1800000);
+                    timer.schedule(new TimedTaskBiHourly(this), Date.from(biHourly.atZone(ZoneId.systemDefault()).toInstant()), 10000);
                 } else {
                     FileInputStream inputstream = new FileInputStream("StopCovid19Cat.jpg");
                     Image img = new Image(inputstream);
@@ -312,6 +312,14 @@ public class User extends UnicastRemoteObject implements UserInterface {
                 mixingProxy.acknowledge(acknowledgedTokens);
             }
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void flushCapsules(){
+        try {
+            mixingProxy.flushCapsules();
+        } catch (RemoteException e) {
             e.printStackTrace();
         }
     }
